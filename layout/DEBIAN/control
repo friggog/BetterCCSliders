@@ -1,0 +1,9 @@
+Package: me.chewitt.bccs
+Name: BetterCCSliders
+Depends: firmware(>= 7.0), mobilesubstrate, preferenceloader
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Tap at the end of sliders in control centre to set max/min value.
+Maintainer: Charlie Hewitt <contact@chewitt.me>
+Author: Charlie Hewitt <contact@chewitt.me>
+Section: Tweaks
