@@ -4,14 +4,17 @@
 #define PreferencesFilePath @"/var/mobile/Library/Preferences/me.chewitt.bccsPrefs.plist"
 
 static NSDictionary* preferences;
-CGFloat delta = 1.0;
+CGFloat deltaUp = 1.0;
+CGFloat deltaDown = 1.0;
 NSObject * minObj = [NSObject new];
 NSObject * maxObj = [NSObject new];
 
 static void updatePrefs() {
   preferences = [[NSDictionary alloc] initWithContentsOfFile:PreferencesFilePath];
   if([preferences valueForKey:@"delta"])
-    delta = [[preferences valueForKey:@"delta"] floatValue];
+    deltaUp = [[preferences valueForKey:@"delta"] floatValue];
+  if([preferences valueForKey:@"deltaDown"])
+    deltaDown = [[preferences valueForKey:@"deltaDown"] floatValue];
 }
 
 static void PreferencesChangedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -73,7 +76,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 
 -(void) incrementValue {
 	BOOL isBrightness = self.tag == 123432;
-	CGFloat value = self.value + delta;
+	CGFloat value = self.value + deltaUp;
 
 	if(isBrightness) {
 		[[%c(SBBrightnessController) sharedBrightnessController] setBrightnessLevel:value];
@@ -88,7 +91,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 
 -(void) decrementValue {
 	BOOL isBrightness = self.tag == 123432;
-	CGFloat value = self.value - delta;
+	CGFloat value = self.value - deltaDown;
 
 	if(isBrightness) {
 		[[%c(SBBrightnessController) sharedBrightnessController] setBrightnessLevel:value];
